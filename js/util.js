@@ -21,6 +21,8 @@ const getUniqueNumber = (min, max) => {
   };
 };
 
+const getNewRandomArray = (arr) => arr.slice().sort(() => Math.random() - 0.5).slice(0, getRandomArrayElement(arr));
+
 const uploadPicture = (input, preview) => {
   input.addEventListener('change', () => {
     const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
@@ -42,4 +44,4 @@ const uploadPicture = (input, preview) => {
   });
 };
 
-export {getRandomIntInclusive, getRandomFloatInclusive, getRandomArrayElement, getUniqueNumber, uploadPicture};
+export {getRandomIntInclusive, getRandomFloatInclusive, getRandomArrayElement, getUniqueNumber, uploadPicture, getNewRandomArray};
