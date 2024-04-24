@@ -76,7 +76,7 @@ const renderAd = () => ({
       lat: getRandomFloatInclusive(35.65000, 35.70000, 5),
       lng: getRandomFloatInclusive(139.70000, 139.80000, 5)
     },
-    price: getRandomIntInclusive(100, 1000),
+    price: getRandomIntInclusive(5000, 20000),
     type: ACCOMOD_TYPES[getRandomArrayElement(ACCOMOD_TYPES)],
     rooms: getRandomIntInclusive(1, 5),
     guests: getRandomIntInclusive(1, 5) * 2,
@@ -93,4 +93,5 @@ const renderAd = () => ({
 });
 
 const getSimilarAds = () => Array.from({length: 10}, renderAd);
-console.log(getSimilarAds());
+
+export {getSimilarAds};

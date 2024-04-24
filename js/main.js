@@ -4,8 +4,7 @@ import './upload-avatar.js';
 import './upload-accomodation-photo.js';
 import {setUserFormSubmit} from './send-data.js';
 import {sendForm} from './send-form.js';
-import './util.js';
-import './render-similar-ads.js';
+import './render-similar-elements-layout.js';
 
 setInactivePageMode();
 setActivePageMode();
