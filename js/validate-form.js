@@ -9,12 +9,7 @@ const pristine = new Pristine(adForm, {
   errorTextClass: 'ad-form__error'
 });
 
-const validatePrice = (value) => value <= 100000;
-
-pristine.addValidator(adForm.querySelector('#price'),
-  validatePrice,
-  'Максимальная цена 100000');
-
+// rooms capacity validation
 const roomsSelect = adForm.querySelector('#room_number');
 const capacitySelect = adForm.querySelector('#capacity');
 
@@ -59,6 +54,29 @@ roomsSelect.addEventListener('change', () => {
 
 capacitySelect.addEventListener('change', () => {
   validateroomCapacity();
+});
+
+// accomodation type - price validation
+const accomodType = adForm.querySelector('#type');
+const price = adForm.querySelector('#price');
+const typeOptions = {
+  'bungalow': 0,
+  'flat': 1000,
+  'hotel' : 3000,
+  'house': 5000,
+  'palace': 10000
+};
+
+const validatePrice = (value) => value >= typeOptions[accomodType.value] && value <= 100000;
+const getPriceErrorMessage = () => `Цена должна быть в диапазоне от ${typeOptions[accomodType.value]} до 100000`;
+
+pristine.addValidator(price, validatePrice, getPriceErrorMessage);
+
+accomodType.addEventListener('change', () => {
+  price.setAttribute('min', `${typeOptions[accomodType.value]}`);
+  price.setAttribute('data-pristine-minvalue-message', `Минимальная цена ${typeOptions[accomodType.value]}`);
+  price.placeholder = `${typeOptions[accomodType.value]}`;
+  pristine.validate(price);
 });
 
 adForm.addEventListener('submit', (evt) => {
