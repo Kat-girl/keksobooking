@@ -79,6 +79,18 @@ accomodType.addEventListener('change', () => {
   pristine.validate(price);
 });
 
+// time-in - time-out validation
+const timeIn = adForm.querySelector('#timein');
+const timeOut = adForm.querySelector('#timeout');
+
+timeIn.addEventListener('change', () => {
+  timeOut.value = timeIn.value;
+});
+
+timeOut.addEventListener('change', () => {
+  timeIn.value = timeOut.value;
+});
+
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
