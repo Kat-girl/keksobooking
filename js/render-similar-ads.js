@@ -92,6 +92,6 @@ const renderAd = () => ({
   }
 });
 
-const getSimilarAds = () => Array.from({length: 10}, renderAd);
+const getSimilarAds = () => Array.from({length: 50}, renderAd);
 
 export {getSimilarAds};

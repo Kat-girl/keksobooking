@@ -41,4 +41,4 @@ const showAds = (datas) => {
 // showAds(getSimilarAds());
 
 
-renderAd(getSimilarAds()[6]);
+// renderAd(getSimilarAds()[6]);
