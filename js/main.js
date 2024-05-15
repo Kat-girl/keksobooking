@@ -16,4 +16,4 @@ fetch('https://25.javascript.htmlacademy.pro/keksobooking/data')
     console.log(ads);
   });
 
-setUserFormSubmit(sendForm);
+// setUserFormSubmit(sendForm);
