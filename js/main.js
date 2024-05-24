@@ -6,9 +6,7 @@ import './upload-accomodation-photo.js';
 import './render-similar-elements-layout.js';
 import './validate-form.js';
 import './map.js';
-
-
-
+import './slider.js';
 
 fetch('https://25.javascript.htmlacademy.pro/keksobooking/data')
   .then((response) => response.json())

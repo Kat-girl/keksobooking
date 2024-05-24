@@ -72,11 +72,13 @@ const getPriceErrorMessage = () => `Цена должна быть в диапа
 
 pristine.addValidator(price, validatePrice, getPriceErrorMessage);
 
+const pristineValidatePrice = () => pristine.validate(price);
+
 accomodType.addEventListener('change', () => {
   price.setAttribute('min', `${typeOptions[accomodType.value]}`);
   price.setAttribute('data-pristine-minvalue-message', `Минимальная цена ${typeOptions[accomodType.value]}`);
   price.placeholder = `${typeOptions[accomodType.value]}`;
-  pristine.validate(price);
+  pristineValidatePrice();
 });
 
 // time-in - time-out validation
@@ -101,3 +103,5 @@ adForm.addEventListener('submit', (evt) => {
     console.log('nope');
   }
 });
+
+export {pristineValidatePrice};

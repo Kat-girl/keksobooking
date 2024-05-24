@@ -1,7 +1,3 @@
-import { getSimilarAds } from './render-similar-ads.js';
-
-const mapCanvas = document.querySelector('#map-canvas');
-
 const accomodationTypes = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
@@ -12,7 +8,6 @@ const accomodationTypes = {
 
 const renderAd = (data) => {
   const templateCard = document.querySelector('#card').content.querySelector('.popup').cloneNode(true);
-  const fragment = document.createDocumentFragment();
   templateCard.querySelector('.popup__avatar').src = data.author.avatar;
   templateCard.querySelector('.popup__title').textContent = data.offer.title;
   templateCard.querySelector('.popup__text--address').textContent = `${data.offer.address.lat}, ${data.offer.address.lng}`;
@@ -30,15 +25,7 @@ const renderAd = (data) => {
   templateCard.querySelector('.popup__photos').textContent = '';
   data.offer.photos.forEach((photo) => templateCard.querySelector('.popup__photos').insertAdjacentHTML('beforeEnd', `<img src="${photo}" class="popup__photo" width="45" height="40" alt="Фотография жилья">`));
 
-  fragment.append(templateCard);
-  mapCanvas.append(fragment);
+  return templateCard;
 };
 
-const showAds = (datas) => {
-  datas.forEach((ad) => renderAd(ad));
-};
-
-// showAds(getSimilarAds());
-
-
-// renderAd(getSimilarAds()[6]);
+export {renderAd};

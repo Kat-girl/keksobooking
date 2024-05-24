@@ -1,6 +1,7 @@
 import {setInactivePageMode} from './set-inactive-page-mode.js';
 import {setActivePageMode} from './set-active-page-mode.js';
 import {getSimilarAds} from './render-similar-ads.js';
+import {renderAd} from './render-similar-elements-layout.js';
 
 setInactivePageMode();
 
@@ -40,7 +41,6 @@ marker.addTo(map);
 document.querySelector('#address').value = marker.getLatLng();
 
 marker.on('moveend', (evt) => {
-  console.log(evt.target.getLatLng());
   document.querySelector('#address').value = evt.target.getLatLng();
 });
 
@@ -62,5 +62,5 @@ similarAds.forEach((ad) => {
       icon: regularPinIcon
     }
   );
-  regularMarker.addTo(map).bindPopup(ad.offer.title);
+  regularMarker.addTo(map).bindPopup(renderAd(ad));
 });
