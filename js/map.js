@@ -1,6 +1,5 @@
 import {setInactivePageMode} from './set-inactive-page-mode.js';
 import {setActivePageMode} from './set-active-page-mode.js';
-import {getSimilarAds} from './render-similar-ads.js';
 import {renderAd} from './render-similar-elements-layout.js';
 
 setInactivePageMode();
@@ -44,23 +43,26 @@ marker.on('moveend', (evt) => {
   document.querySelector('#address').value = evt.target.getLatLng();
 });
 
-const similarAds = getSimilarAds();
-
 const regularPinIcon = L.icon({
   iconUrl: './img/pin.svg',
   iconSize: [40, 40],
   iconAnchor: [20, 40]
 });
 
-similarAds.forEach((ad) => {
-  const regularMarker = L.marker(
-    {
-      lat: ad.location.lat,
-      lng: ad.location.lng
-    },
-    {
-      icon: regularPinIcon
-    }
-  );
-  regularMarker.addTo(map).bindPopup(renderAd(ad));
-});
+const renderMarkers = (similarAds) => {
+  similarAds.forEach((ad) => {
+    const regularMarker = L.marker(
+      {
+        lat: ad.location.lat,
+        lng: ad.location.lng
+      },
+      {
+        icon: regularPinIcon
+      }
+    );
+    regularMarker.addTo(map).bindPopup(renderAd(ad));
+  });
+};
+
+export {renderMarkers};
+

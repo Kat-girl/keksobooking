@@ -17,13 +17,17 @@ const renderAd = (data) => {
   templateCard.querySelector('.popup__text--time').textContent = `Заезд после ${data.offer.checkin}, выезд до ${data.offer.checkout}`;
 
   templateCard.querySelector('.popup__features').textContent = '';
-  data.offer.features.forEach((feature) => templateCard.querySelector('.popup__features').insertAdjacentHTML('beforeEnd', `<li class="popup__feature popup__feature--${feature}"></li>`));
+  if (data.offer.features) {
+    data.offer.features.forEach((feature) => templateCard.querySelector('.popup__features').insertAdjacentHTML('beforeEnd', `<li class="popup__feature popup__feature--${feature}"></li>`));
+  }
 
   templateCard.querySelector('.popup__description').textContent = '';
   templateCard.querySelector('.popup__description').textContent = data.offer.description;
 
   templateCard.querySelector('.popup__photos').textContent = '';
-  data.offer.photos.forEach((photo) => templateCard.querySelector('.popup__photos').insertAdjacentHTML('beforeEnd', `<img src="${photo}" class="popup__photo" width="45" height="40" alt="Фотография жилья">`));
+  if (data.offer.photos) {
+    data.offer.photos.forEach((photo) => templateCard.querySelector('.popup__photos').insertAdjacentHTML('beforeEnd', `<img src="${photo}" class="popup__photo" width="45" height="40" alt="Фотография жилья">`));
+  }
 
   return templateCard;
 };
