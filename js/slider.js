@@ -3,12 +3,14 @@ import {pristineValidatePrice} from './validate-form.js';
 const sliderElement = document.querySelector('.ad-form__slider');
 const price = document.querySelector('#price');
 
+const SLIDER_START = 5000;
+
 noUiSlider.create(sliderElement, {
   range: {
     min: 0,
     max: 100000
   },
-  start: 1000,
+  start: SLIDER_START,
   step: 1,
   connect: 'lower',
   format: {
@@ -33,3 +35,9 @@ sliderElement.noUiSlider.on('update', () => {
 price.addEventListener('input', () => {
   sliderElement.noUiSlider.set(price.value);
 });
+
+const setDefaultSliderPosition = () => {
+  sliderElement.noUiSlider.set(SLIDER_START);
+};
+
+export {setDefaultSliderPosition};

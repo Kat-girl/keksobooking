@@ -1,3 +1,5 @@
+import {showErrorMessage} from './show-error-message.js';
+
 const adForm =  document.querySelector('.ad-form');
 
 const pristine = new Pristine(adForm, {
@@ -93,15 +95,31 @@ timeOut.addEventListener('change', () => {
   timeIn.value = timeOut.value;
 });
 
-adForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
+const setUserFormSubmit = (onSuccess) => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
-  const isValid = pristine.validate();
-  if (isValid) {
-    console.log('ok');
-  } else {
-    console.log('nope');
-  }
-});
+    const isValid = pristine.validate();
+    if (isValid) {
+      console.log('ok');
+      const formData = new FormData(evt.target);
+      fetch(
+        'https://25.javascript.htmlacademy.pro/keksobooking',
+        {
+          method: 'POST',
+          body: formData
+        }
+      ).then((response) => {
+        if (response.ok) {
+          onSuccess();
+        } else {
+          showErrorMessage();
+        }
+      })
+        .catch(() => showErrorMessage());
+    }
+  });
+};
 
-export {pristineValidatePrice};
+
+export {pristineValidatePrice, setUserFormSubmit};

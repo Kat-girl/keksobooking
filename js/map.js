@@ -4,12 +4,15 @@ import {renderAd} from './render-similar-elements-layout.js';
 
 setInactivePageMode();
 
+const LATITUDE = 35.6895;
+const LONGITUDE = 139.692;
+
 const map = L.map('map-canvas').on('load', () => {
   setActivePageMode();
 })
   .setView(
-    {lat: 35.6895,
-      lng: 139.692}, 10
+    {lat: LATITUDE,
+      lng: LONGITUDE}, 10
   );
 
 L.tileLayer(
@@ -27,8 +30,8 @@ const mainPinIcon = L.icon({
 
 const marker = L.marker(
   {
-    lat: 35.6895,
-    lng: 139.692
+    lat: LATITUDE,
+    lng: LONGITUDE
   },
   {
     draggable: true,
@@ -64,5 +67,23 @@ const renderMarkers = (similarAds) => {
   });
 };
 
-export {renderMarkers};
+const setDefaultMarkerPosition = () => {
+  map.setView({
+    lat: LATITUDE,
+    lng: LONGITUDE
+  }, 10);
+  marker.setLatLng({
+    lat: LATITUDE,
+    lng: LONGITUDE
+  });
+  document.querySelector('#address').value = marker.getLatLng();
+};
+
+const hideBaloon = () => {
+  if (document.querySelector('.leaflet-popup')) {
+    document.querySelector('.leaflet-popup').classList.add('hidden');
+  }
+};
+
+export {renderMarkers, setDefaultMarkerPosition, hideBaloon};
 
