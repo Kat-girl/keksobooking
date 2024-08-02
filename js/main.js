@@ -8,7 +8,7 @@ import './render-similar-elements-layout.js';
 import {setUserFormSubmit} from './validate-form.js';
 import './map.js';
 import './slider.js';
-import {renderMarkers} from './map.js';
+import {cancelHideBaloon, renderMarkers} from './map.js';
 import './api.js';
 import './show-error-message.js';
 import './show-success-message.js';
@@ -17,3 +17,5 @@ import {getData} from './api.js';
 getData((ads) => renderMarkers(ads));
 
 setUserFormSubmit(sendForm);
+
+// cancelHideBaloon();

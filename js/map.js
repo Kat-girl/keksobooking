@@ -85,5 +85,11 @@ const hideBaloon = () => {
   }
 };
 
-export {renderMarkers, setDefaultMarkerPosition, hideBaloon};
+const cancelHideBaloon = () => {
+  if (document.querySelector('.leaflet-popup').classList.contains('hidden')) {
+    document.querySelector('.leaflet-popup').classList.remove('hidden');
+  }
+};
+
+export {renderMarkers, setDefaultMarkerPosition, hideBaloon, cancelHideBaloon};
 

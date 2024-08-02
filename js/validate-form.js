@@ -1,5 +1,6 @@
 import {showErrorMessage} from './show-error-message.js';
 import {sendData} from './api.js';
+import {disableSubmitButton, enableSubmitButton} from './disable-enable-submit-button.js';
 
 const adForm =  document.querySelector('.ad-form');
 
@@ -102,9 +103,16 @@ const setUserFormSubmit = (onSuccess) => {
 
     const isValid = pristine.validate();
     if (isValid) {
+      disableSubmitButton();
       sendData(
-        () => onSuccess(),
-        () => showErrorMessage(),
+        () => {
+          onSuccess();
+          enableSubmitButton();
+        },
+        () => {
+          showErrorMessage();
+          enableSubmitButton();
+        },
         new FormData(evt.target)
       );
     }

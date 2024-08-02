@@ -10,7 +10,7 @@ const renderAd = (data) => {
   const templateCard = document.querySelector('#card').content.querySelector('.popup').cloneNode(true);
   templateCard.querySelector('.popup__avatar').src = data.author.avatar;
   templateCard.querySelector('.popup__title').textContent = data.offer.title;
-  templateCard.querySelector('.popup__text--address').textContent = `${data.offer.address.lat}, ${data.offer.address.lng}`;
+  templateCard.querySelector('.popup__text--address').textContent = `${data.offer.address}`;
   templateCard.querySelector('.popup__text--price').textContent = `${data.offer.price} ₽/ночь`;
   templateCard.querySelector('.popup__type').textContent = accomodationTypes[data.offer.type];
   templateCard.querySelector('.popup__text--capacity').textContent = `${data.offer.rooms} комнаты для ${data.offer.guests} гостей`;

@@ -4,6 +4,7 @@ const getData = (onSuccess) => {
   )
     .then((response) => response.json())
     .then((ads) => {
+      console.log(ads);
       onSuccess(ads);
     });
 };
