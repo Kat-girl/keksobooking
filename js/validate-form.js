@@ -1,4 +1,5 @@
 import {showErrorMessage} from './show-error-message.js';
+import {sendData} from './api.js';
 
 const adForm =  document.querySelector('.ad-form');
 
@@ -101,22 +102,11 @@ const setUserFormSubmit = (onSuccess) => {
 
     const isValid = pristine.validate();
     if (isValid) {
-      console.log('ok');
-      const formData = new FormData(evt.target);
-      fetch(
-        'https://25.javascript.htmlacademy.pro/keksobooking',
-        {
-          method: 'POST',
-          body: formData
-        }
-      ).then((response) => {
-        if (response.ok) {
-          onSuccess();
-        } else {
-          showErrorMessage();
-        }
-      })
-        .catch(() => showErrorMessage());
+      sendData(
+        () => onSuccess(),
+        () => showErrorMessage(),
+        new FormData(evt.target)
+      );
     }
   });
 };

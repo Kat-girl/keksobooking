@@ -9,20 +9,11 @@ import {setUserFormSubmit} from './validate-form.js';
 import './map.js';
 import './slider.js';
 import {renderMarkers} from './map.js';
-import './get-data.js';
+import './api.js';
 import './show-error-message.js';
+import './show-success-message.js';
+import {getData} from './api.js';
 
-fetch(
-  'https://25.javascript.htmlacademy.pro/keksobooking/data',
-)
-  .then((response) => {
-    console.log(response.status);
-    console.log(response.ok);
-    return response.json();
-  })
-  .then((ads) => {
-    console.log(ads);
-    renderMarkers(ads);
-  });
+getData((ads) => renderMarkers(ads));
 
 setUserFormSubmit(sendForm);
