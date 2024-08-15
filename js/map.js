@@ -1,6 +1,7 @@
 import {setInactivePageMode} from './set-inactive-page-mode.js';
 import {setActivePageMode} from './set-active-page-mode.js';
 import {renderAd} from './render-similar-elements-layout.js';
+import { filterHousingType } from './filters.js';
 
 setInactivePageMode();
 
@@ -52,20 +53,27 @@ const regularPinIcon = L.icon({
   iconAnchor: [20, 40]
 });
 
+const ADS_COUNT = 10;
+
+const markersGroup = L.layerGroup().addTo(map);
+
 const renderMarkers = (similarAds) => {
-  similarAds.forEach((ad) => {
-    const regularMarker = L.marker(
-      {
-        lat: ad.location.lat,
-        lng: ad.location.lng
-      },
-      {
-        icon: regularPinIcon
-      }
-    );
-    regularMarker.addTo(map).bindPopup(renderAd(ad));
-  });
+  filterHousingType(similarAds).slice(0, ADS_COUNT)
+    .forEach((ad) => {
+      const regularMarker = L.marker(
+        {
+          lat: ad.location.lat,
+          lng: ad.location.lng
+        },
+        {
+          icon: regularPinIcon
+        }
+      );
+      regularMarker.addTo(markersGroup).bindPopup(renderAd(ad));
+    });
 };
+
+const clearLayer = () => markersGroup.clearLayers();
 
 const setDefaultMarkerPosition = () => {
   map.setView({
@@ -85,5 +93,5 @@ const hideBaloon = () => {
   }
 };
 
-export {renderMarkers, setDefaultMarkerPosition, hideBaloon};
+export {renderMarkers, setDefaultMarkerPosition, hideBaloon, clearLayer};
 

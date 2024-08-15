@@ -14,9 +14,13 @@ import './show-error-message.js';
 import './show-success-message.js';
 import {getData} from './api.js';
 import {showAlert} from './util.js';
+import {onHousingTypeChange} from './filters.js';
 
-getData((ads) => renderMarkers(ads), showAlert);
+getData(
+  (ads) => {
+    renderMarkers(ads);
+    onHousingTypeChange(() => renderMarkers(ads));
+  },
+  showAlert);
 
 setUserFormSubmit(sendForm);
-
-// cancelHideBaloon();
