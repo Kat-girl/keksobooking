@@ -14,12 +14,12 @@ import './show-error-message.js';
 import './show-success-message.js';
 import {getData} from './api.js';
 import {showAlert} from './util.js';
-import {onHousingTypeChange} from './filters.js';
+import {onFilterChange} from './filters.js';
 
 getData(
   (ads) => {
     renderMarkers(ads);
-    onHousingTypeChange(() => renderMarkers(ads));
+    onFilterChange(() => renderMarkers(ads));
   },
   showAlert);
 

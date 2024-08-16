@@ -1,7 +1,7 @@
 import {setInactivePageMode} from './set-inactive-page-mode.js';
 import {setActivePageMode} from './set-active-page-mode.js';
 import {renderAd} from './render-similar-elements-layout.js';
-import {applyFilters} from './filters.js';
+import { filterHousingType, filterHousingPrice, applyFilters } from './filters.js';
 
 setInactivePageMode();
 
@@ -57,23 +57,20 @@ const ADS_COUNT = 10;
 
 const markersGroup = L.layerGroup().addTo(map);
 
-const makeMarkers = (ads) => {
-  ads.forEach((ad) => {
-    const regularMarker = L.marker(
-      {
-        lat: ad.location.lat,
-        lng: ad.location.lng
-      },
-      {
-        icon: regularPinIcon
-      }
-    );
-    regularMarker.addTo(markersGroup).bindPopup(renderAd(ad));
-  });
-};
-
 const renderMarkers = (similarAds) => {
-  makeMarkers(applyFilters(similarAds).slice(0, ADS_COUNT));
+  filterHousingPrice(similarAds).slice(0, ADS_COUNT)
+    .forEach((ad) => {
+      const regularMarker = L.marker(
+        {
+          lat: ad.location.lat,
+          lng: ad.location.lng
+        },
+        {
+          icon: regularPinIcon
+        }
+      );
+      regularMarker.addTo(markersGroup).bindPopup(renderAd(ad));
+    });
 };
 
 const clearLayer = () => markersGroup.clearLayers();

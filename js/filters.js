@@ -1,22 +1,44 @@
 import {clearLayer} from './map.js';
 
+// Фильтрация по типу жилья
 const housingType = document.querySelector('#housing-type');
-console.log(housingType.value);
 
 const filterHousingType = (ads) => {
   if (housingType.value !== 'any') {
-    const filteredArr = ads.filter((ad) => ad.offer.type === housingType.value);
-    return filteredArr;
+    return ads.filter((ad) => ad.offer.type === housingType.value);
   } else {
     return ads;
   }
 };
 
-const onHousingTypeChange = (cb) => {
-  housingType.addEventListener('change', () => {
-    clearLayer();
-    cb();
-  });
+// Фильтрация по цене
+const housingPrice = document.querySelector('#housing-price');
+
+const filterHousingPrice = (ads) => {
+  if (housingPrice.value !== 'any') {
+    if (housingPrice.value === 'low') {
+      return ads.filter((ad) => ad.offer.price <= 10000);
+    } else if (housingPrice.value === 'middle') {
+      return ads.filter((ad) => ad.offer.price > 10000 && ad.offer.price < 50000);
+    } else {
+      return ads.filter((ad) => ad.offer.price >= 50000);
+    }
+  } else {
+    return ads;
+  }
 };
 
-export {filterHousingType, onHousingTypeChange};
+const applyFilters = (ads) => filterHousingPrice(filterHousingType(ads));
+
+const onFilterChange = (cb) => {
+  const mapFilters = document.querySelectorAll('.map__filter');
+  for (const filter of mapFilters) {
+    filter.addEventListener('change', () => {
+      clearLayer();
+      cb();
+    });
+  }
+};
+
+
+export {onFilterChange, applyFilters};
