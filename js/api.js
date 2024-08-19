@@ -11,6 +11,7 @@ const getData = (onSuccess, onFail) => {
     })
     .then((ads) => {
       onSuccess(ads);
+      console.log(ads);
     })
     .catch(() => onFail('Не удалось загрузить данные с сервера'));
 };
