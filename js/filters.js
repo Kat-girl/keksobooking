@@ -1,11 +1,8 @@
 import {clearLayer} from './map.js';
 
 // Фильтрация по типу жилья
-// Фильтрация по типу жилья
-const housingType = document.querySelector('#housing-type');
-console.log(housingType.value);
-
 const filterHousingType = (ads) => {
+  const housingType = document.querySelector('#housing-type');
   if (housingType.value !== 'any') {
     return ads.filter((ad) => ad.offer.type === housingType.value);
   } else {
@@ -52,11 +49,14 @@ const filterHousingGuests = (ads) => {
   }
 };
 
-const onHousingTypeChange = (cb) => {
-  housingType.addEventListener('change', () => {
+const applyFilters = (ads) => filterHousingGuests(filterHousingRooms(filterHousingPrice(filterHousingType(ads))));
+
+const onFilterChange = (cb) => {
+  const mapFilters = document.querySelector('.map__filters');
+  mapFilters.addEventListener('change', () => {
     clearLayer();
     cb();
   });
 };
 
-export {filterHousingType, onHousingTypeChange};
+export {applyFilters, onFilterChange};
