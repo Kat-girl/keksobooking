@@ -49,7 +49,37 @@ const filterHousingGuests = (ads) => {
   }
 };
 
-const applyFilters = (ads) => filterHousingGuests(filterHousingRooms(filterHousingPrice(filterHousingType(ads))));
+// Фильтрация по фичам
+const features = document.querySelectorAll('input[name = "features"]');
+const getCheckedFeatures = () => {
+  const checkedFeatures = new Array();
+  for (const feature of features) {
+    if(feature.checked){
+      checkedFeatures.push(feature.value);
+    }
+  }
+  return checkedFeatures;
+};
+
+const getAdRank = (ad) => {
+  let rank = 0;
+  getCheckedFeatures().forEach((feature) => {
+    if (ad.offer.features && ad.offer.features.includes(feature)) {
+      rank ++;
+    }
+  });
+  return rank;
+};
+
+const compareAds = (adA, adB) => {
+  const rankA = getAdRank(adA);
+  const rankB = getAdRank(adB);
+  return rankB - rankA;
+};
+
+const applyFilters = (ads) => filterHousingGuests(filterHousingRooms(filterHousingPrice(filterHousingType(ads))))
+  .slice()
+  .sort(compareAds);
 
 const onFilterChange = (cb) => {
   const mapFilters = document.querySelector('.map__filters');
