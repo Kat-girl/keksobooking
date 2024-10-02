@@ -1,3 +1,5 @@
+import {setInactiveFiltersMode} from './set-inactive-page-mode.js';
+
 const getData = (onSuccess, onFail) => {
   fetch(
     'https://25.javascript.htmlacademy.pro/keksobooking/data',
@@ -7,6 +9,7 @@ const getData = (onSuccess, onFail) => {
         return response.json();
       } else {
         onFail('Не удалось загрузить данные с сервера');
+        setInactiveFiltersMode();
       }
     })
     .then((ads) => {

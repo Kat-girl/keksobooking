@@ -44,6 +44,8 @@ const uploadPicture = (input, preview) => {
   });
 };
 
+const ALERT_SHOW_TIME = 5000;
+
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.position = 'absolute';
@@ -60,7 +62,15 @@ const showAlert = (message) => {
 
   setTimeout(() => {
     alertContainer.remove();
-  }, 5000);
+  }, ALERT_SHOW_TIME);
 };
 
-export {getRandomIntInclusive, getRandomFloatInclusive, getRandomArrayElement, getUniqueNumber, uploadPicture, getNewRandomArray, showAlert};
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export {getRandomIntInclusive, getRandomFloatInclusive, getRandomArrayElement, getUniqueNumber, uploadPicture, getNewRandomArray, showAlert, debounce};

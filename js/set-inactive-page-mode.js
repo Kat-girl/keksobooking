@@ -5,6 +5,13 @@ const mapFilterForm = document.querySelector('.map__filters');
 const mapFilters = document.querySelectorAll('.map__filter');
 const mapFeatures = document.querySelector('.map__features');
 
+const setInactiveFiltersMode = () => {
+  mapFilterForm.classList.add('ad-form--disabled');
+  for (const filter of mapFilters) {
+    filter.disabled = true;
+  }
+  mapFeatures.disabled = true;
+};
 
 const setInactivePageMode = () => {
   adForm.classList.add('ad-form--disabled');
@@ -13,13 +20,9 @@ const setInactivePageMode = () => {
     element.disabled = true;
   }
 
-  mapFilterForm.classList.add('ad-form--disabled');
-  for (const filter of mapFilters) {
-    filter.disabled = true;
-  }
-  mapFeatures.disabled = true;
+  setInactiveFiltersMode();
 };
 
-export {setInactivePageMode};
+export {setInactivePageMode, setInactiveFiltersMode};
 
 
